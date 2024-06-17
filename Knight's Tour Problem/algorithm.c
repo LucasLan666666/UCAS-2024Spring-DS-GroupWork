@@ -20,8 +20,8 @@ GetNextStep(Point innerBoard[BOARD_SIZE][BOARD_SIZE], History *history_ptr)
 
     /* 随机选取马的落点，如果已经落过则重新选取 */
     do {
-        x = random0To7();
-        y = random0To7();
+        x = random0ToBoardSize();
+        y = random0ToBoardSize();
     } while (innerBoard[x][y].isPassed == True);
 
     history_ptr->path[history_ptr->pointer].x = x;

@@ -7,10 +7,10 @@
 #ifndef KTP_H
 #define KTP_H
 
-#ifdef           _WIN32
-#define    CLEAR_SCREEN           "cls"   // Windows 下清屏指令
+#ifdef        _WIN32
+#define CLEAR_SCREEN   "cls"                    /* Windows 下清屏指令 */
 #else
-#define    CLEAR_SCREEN         "clear"   // Unix-like 环境下清屏指令
+#define CLEAR_SCREEN   "clear"                  /* Linux 下清屏指令 */
 #endif /* _WIN32 */
 
 #define   BOARD_SIZE   8                        /* 棋盘大小 8*8 */
@@ -101,7 +101,7 @@ GetNextStep(Point innerBoard[BOARD_SIZE][BOARD_SIZE], History *history_ptr);
 
 /* 测试用 */
 boolen randomBoolen(void);
-int random0To7(void);
+int random0ToBoardSize(void);
 
 
 

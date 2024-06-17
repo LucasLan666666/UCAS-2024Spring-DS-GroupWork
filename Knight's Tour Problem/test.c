@@ -7,13 +7,13 @@
 boolen
 randomBoolen(void)
 {
-    return (rand() % 2) ? True : False; /* 生成一个 0 到 1 之间的随机数 */
+    return (rand() % 2) ? True : False; /* 随机生成 True 或 False */
 }
 
 int
-random0To7(void)
+random0ToBoardSize(void)
 {
-    return rand() % 8; /* 生成一个 0 到 7 之间的随机数 */
+    return rand() % BOARD_SIZE; /* 生成一个 0 到 BOARD_SIZE-1 之间的随机数 */
 }
 
 ////////////////////////////////////////////////////////////////////////////////
