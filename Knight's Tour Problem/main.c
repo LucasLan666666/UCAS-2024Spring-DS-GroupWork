@@ -1,6 +1,7 @@
 #include "KTP.h"
 
-int main(void)
+int
+main(void)
 {
 #ifdef _WIN32
 #include <stdlib.h>
