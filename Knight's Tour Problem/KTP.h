@@ -63,6 +63,9 @@ extern void ClearScreen(void);
 /* 获取初始位置，写入路径栈 */
 extern void GetStart(History *history_ptr);
 
+/* 小睡一会儿 */
+extern void SleepForAWhile(unsigned int msec);
+
 /* 刷新历史记录 */
 extern void RefreshHistory(History *history_ptr);
 

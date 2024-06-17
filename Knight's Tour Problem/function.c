@@ -8,6 +8,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <sys/select.h>
+#include <sys/time.h>
+#endif /* _WIN32 */
+
+
 /* 清屏 */
 void
 ClearScreen(void)
@@ -25,6 +34,21 @@ Continue(void)
     while ((c = getchar()) != '\n' && c != EOF)
         ;
     if (c == EOF) exit(0); /* 接收到 EOF 直接退出 */
+}
+
+
+/* 小睡一会儿 */
+void
+SleepForAWhile(unsigned int msec)
+{
+#ifdef _WIN32
+    Sleep(msec);
+#else
+    struct timeval tv;
+    tv.tv_sec = 0;
+    tv.tv_usec = msec*1000;
+    select(0, NULL, NULL, NULL, &tv);
+#endif /* _WIN32 */
 }
 
 
@@ -119,11 +143,12 @@ UpdateInnerBoard(History *history_ptr, Point innerBoard[BOARD_SIZE][BOARD_SIZE])
 void
 JudgeOver(History *history_ptr)
 {
-    printf("        ");
     if (history_ptr->pointer == BOARD_SIZE*BOARD_SIZE-1) { /* 走完了 */
+        printf("        ");
         printf(MAGENTA "已经走完全程，按回车键退出..." RESET);
         Continue();
+        ClearScreen();
         exit(0);
     }
-    printf(GREEN "按下回车键继续..." RESET);
+    // printf(GREEN "按下回车键继续..." RESET);
 }

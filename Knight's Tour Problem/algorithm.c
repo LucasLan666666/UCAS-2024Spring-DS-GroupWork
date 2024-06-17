@@ -14,7 +14,7 @@ GetNextStep(Point innerBoard[BOARD_SIZE][BOARD_SIZE], History *history_ptr)
 {
     int x, y;
 
-    history_ptr->pointer++; /* 栈指针 + 1*/
+    history_ptr->pointer++; /* 栈指针 + 1 */
 
     srand(time(NULL)); /* 使用当前时间作为随机数生成的种子 */
 
