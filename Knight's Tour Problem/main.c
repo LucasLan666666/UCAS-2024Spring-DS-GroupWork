@@ -1,12 +1,12 @@
 #include "KTP.h"
-#include <stdlib.h>
 
 int
 main(void)
 {
 #ifdef _WIN32
+#include <stdlib.h>
     system("chcp 65001"); /* 设置 Windows 控制台编码为 utf-8 */
-#endif
+#endif /* _WIN32 */
 
     Point innerBoard[BOARD_SIZE][BOARD_SIZE];   /* 心中棋盘的格局 */
     History history;                            /* 历史记录 */
