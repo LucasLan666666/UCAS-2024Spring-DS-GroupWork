@@ -64,6 +64,7 @@ GetStart(History *history_ptr)
             isValid = True;
         }
         else {
+            printf("         ");
             printf(RED "输入不合法，请重新输入起始坐标（例如：5 3）：" RESET);
         }
         while (getchar() != '\n') /* 丢弃缓冲区中的剩余字符，直到遇到换行符 */
