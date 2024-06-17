@@ -21,7 +21,7 @@ main(void)
     while (1) {
         PrintBoard(innerBoard, &history);       /* 打印心中棋盘 */
         JudgeOver(&history);                    /* 判断是否结束，是则退出 */
-        GetNextStep(innerBoard, &history);                  /* 下一步 */
+        GetNextStep(innerBoard, &history);      /* 下一步 */
         Continue();                             /* 按下回车继续 */
         UpdateInnerBoard(&history, innerBoard); /* 根据历史记录更新心中棋盘 */
     }
