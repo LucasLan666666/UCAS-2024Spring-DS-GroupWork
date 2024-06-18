@@ -6,7 +6,7 @@
 #define RH -1
 
 typedef enum {
-    OK, ERROR, YES, NO
+    OK, ERROR, TRUE, FALSE
 } Status;
 
 typedef int ElemType;
@@ -17,12 +17,12 @@ typedef struct BBSTNode {
 } *BBSTree;
 
 void InOrderTraverse(BBSTree T);
-void L_Rotation(BBSTree *T);
-void R_Rotation(BBSTree *T);
-void L_Balance(BBSTree *T);
-void R_Balance(BBSTree *T);
-Status L_D_Balance(BBSTree *T);
-Status R_D_Balance(BBSTree *T);
+void L_Rotate(BBSTree *T);
+void R_Rotate(BBSTree *T);
+void LeftBalance(BBSTree *T);
+void RightBalance(BBSTree *T);
+Status LeftDeleteBalance(BBSTree *T);
+Status RightDeleteBalance(BBSTree *T);
 
 Status InsertAVL(BBSTree *T, ElemType e, Status *taller);
 Status DeleteAVL(BBSTree *T, ElemType e, Status *shorter);

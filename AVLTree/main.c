@@ -5,7 +5,8 @@
 
 // 打印凹入表形式的平衡二叉树
 void PrintIndentedTree(BBSTree T, int depth) {
-    if (T == NULL) return;
+    if (T == NULL) 
+        return;
     PrintIndentedTree(T->rchild, depth + 1);
     for (int i = 0; i < depth; i++) {
         printf("    ");
@@ -39,7 +40,7 @@ int main() {
             case 1:
                 printf("请输入插入的关键字：");
                 scanf("%d", &key);
-                if (InsertAVL(&T1, key, &taller) == YES) {
+                if (InsertAVL(&T1, key, &taller) == TRUE) {
                     printf("插入成功，当前平衡二叉树：\n");
                 } else {
                     printf("插入失败，关键字已存在。\n");
@@ -50,7 +51,7 @@ int main() {
             case 2:
                 printf("请输入删除的关键字：");
                 scanf("%d", &key);
-                if (DeleteAVL(&T1, key, &shorter) == YES) {
+                if (DeleteAVL(&T1, key, &shorter) == TRUE) {
                     printf("删除成功，当前平衡二叉树：\n");
                 } else {
                     printf("删除失败，关键字不存在。\n");
