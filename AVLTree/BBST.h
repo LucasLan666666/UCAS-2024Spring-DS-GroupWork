@@ -9,7 +9,7 @@ typedef enum {
     OK, ERROR, YES, NO
 } Status;
 
-typedef char ElemType;
+typedef int ElemType;
 typedef struct BBSTNode {
     ElemType data;
     int bf; // 平衡因子
