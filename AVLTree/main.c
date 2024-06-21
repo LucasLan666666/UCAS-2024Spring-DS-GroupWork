@@ -35,42 +35,49 @@ int main() {
         printf("Enter 6 to exit\n");
         printf("Please enter your choice: ");
         scanf("%d", &choice);
-
+        puts("====================================================================================================================================");
         switch (choice) {
             case 1:
                 printf("Please enter the keyword you want to insert: ");
                 scanf("%d", &key);
+                puts("====================================================================================================================================");
                 if (InsertAVL(&T1, key, &taller) == TRUE) {
                     printf("Insert successfully, the current AVLTree is: \n");
                 } else {
                     printf("Insertion failed. The keyword already exists.\n");
                 }
                 PrintTree(T1);
+                puts("====================================================================================================================================");
                 break;
             
             case 2:
                 printf("Please enter the keyword you want to delete: ");
                 scanf("%d", &key);
+                puts("====================================================================================================================================");
                 if (DeleteAVL(&T1, key, &shorter) == TRUE) {
                     printf("Delete successfully, the current AVLTree is: \n");
                 } else {
                     printf("Deletion failed. The keyword doesn't exist.\n");
                 }
                 PrintTree(T1);
+                puts("====================================================================================================================================");
                 break;
 
             case 3:
                 printf("Please enter the keyword you are searching: ");
                 scanf("%d", &key);
+                puts("====================================================================================================================================");
                 BBSTree result = SearchBBST(T1, key);
                 if (result != NULL) {
                     printf("Search successfully, the keyword exists: %d\n", result->data);
                 } else {
                     printf("Search failed, the keyword does not exist.\n");
                 }
+                puts("====================================================================================================================================");
                 break;
 
             case 4: {
+                DestroyBBST(&T1);
                 BBSTree T2 = NULL;
                 printf("Please enter the elements of the two trees to be merged (separated by space, press enter after entering): \n");
                 printf("First tree: ");
@@ -91,18 +98,23 @@ int main() {
                     InsertAVL(&T2, num, &taller);
                     token = strtok(NULL, " ");
                 }
+                puts("====================================================================================================================================");
                 printf("First tree: \n");
                 PrintTree(T1);
+                puts("====================================================================================================================================");
                 printf("Second tree: \n");
                 PrintTree(T2);
+                puts("====================================================================================================================================");
                 MergeBBSTree(&T1, T2);
                 printf("The merged tree: \n");
                 PrintTree(T1);
+                puts("====================================================================================================================================");
                 DestroyBBST(&T2); // 销毁T2，避免内存泄漏
                 break;
             }
 
             case 5: {
+                DestroyBBST(&T1);
                 BBSTree T2 = NULL;
                 BBSTree T3 = NULL;
                 printf("Please enter the elements of the tree to be split (separated by space, press enter after entering): \n");
@@ -117,13 +129,17 @@ int main() {
                 }
                 printf("Please enter the split keyword: ");
                 scanf("%d", &key);
+                puts("====================================================================================================================================");
                 printf("The tree before the split: \n");
                 PrintTree(T1);
+                puts("====================================================================================================================================");
                 DivBBSTree(T1, &T2, &T3, key);
                 printf("The split tree 1: \n");
                 PrintTree(T2);
+                puts("====================================================================================================================================");
                 printf("The split tree 2: \n");
                 PrintTree(T3);
+                puts("====================================================================================================================================");
                 DestroyBBST(&T1); // 销毁T1，避免内存泄漏
                 break;
             }
@@ -134,6 +150,7 @@ int main() {
 
             default:
                 printf("Invalid selection, please enter again!\n");
+                puts("====================================================================================================================================");
         }
     }
 
