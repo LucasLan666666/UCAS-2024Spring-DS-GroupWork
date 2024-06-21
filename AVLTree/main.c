@@ -26,54 +26,54 @@ int main() {
     ElemType key;
 
     while (1) {
-        printf("\n请选择操作：\n");
-        printf("1. 插入\n");
-        printf("2. 删除\n");
-        printf("3. 查找\n");
-        printf("4. 合并\n");
-        printf("5. 分裂\n");
-        printf("6. 退出\n");
-        printf("输入选择：");
+        printf("\nPlease input the operation type: \n");
+        printf("Enter 1 to insert node in the AVLTree\n");
+        printf("Enter 2 to delete node in the AVLTree\n");
+        printf("Enter 3 to search elem in the AVLTree\n");
+        printf("Enter 4 to merge two AVLTree\n");
+        printf("Enter 5 to split the AVLTree\n");
+        printf("Enter 6 to exit\n");
+        printf("Please enter your choice: ");
         scanf("%d", &choice);
 
         switch (choice) {
             case 1:
-                printf("请输入插入的关键字：");
+                printf("Please enter the keyword you want to insert: ");
                 scanf("%d", &key);
                 if (InsertAVL(&T1, key, &taller) == TRUE) {
-                    printf("插入成功，当前平衡二叉树：\n");
+                    printf("Insert successfully, the current AVLTree is: \n");
                 } else {
-                    printf("插入失败，关键字已存在。\n");
+                    printf("Insertion failed. The keyword already exists.\n");
                 }
                 PrintTree(T1);
                 break;
             
             case 2:
-                printf("请输入删除的关键字：");
+                printf("Please enter the keyword you want to delete: ");
                 scanf("%d", &key);
                 if (DeleteAVL(&T1, key, &shorter) == TRUE) {
-                    printf("删除成功，当前平衡二叉树：\n");
+                    printf("Delete successfully, the current AVLTree is: \n");
                 } else {
-                    printf("删除失败，关键字不存在。\n");
+                    printf("Deletion failed. The keyword doesn't exist.\n");
                 }
                 PrintTree(T1);
                 break;
 
             case 3:
-                printf("请输入查找的关键字：");
+                printf("Please enter the keyword you are searching: ");
                 scanf("%d", &key);
                 BBSTree result = SearchBBST(T1, key);
                 if (result != NULL) {
-                    printf("查找成功，关键字存在：%d\n", result->data);
+                    printf("Search successfully, the keyword exists: %d\n", result->data);
                 } else {
-                    printf("查找失败，关键字不存在。\n");
+                    printf("Search failed, the keyword does not exist.\n");
                 }
                 break;
 
             case 4: {
                 BBSTree T2 = NULL;
-                printf("请输入合并的两棵树的元素（以空格分隔，输入完按回车）：\n");
-                printf("第一棵树：");
+                printf("Please enter the elements of the two trees to be merged (separated by space, press enter after entering): \n");
+                printf("First tree: ");
                 char buffer[256];
                 getchar(); // 清除缓冲区
                 fgets(buffer, 256, stdin);
@@ -83,7 +83,7 @@ int main() {
                     InsertAVL(&T1, num, &taller);
                     token = strtok(NULL, " ");
                 }
-                printf("第二棵树：");
+                printf("Second tree: ");
                 fgets(buffer, 256, stdin);
                 token = strtok(buffer, " ");
                 while (token != NULL) {
@@ -91,12 +91,12 @@ int main() {
                     InsertAVL(&T2, num, &taller);
                     token = strtok(NULL, " ");
                 }
-                printf("第一棵树：\n");
+                printf("First tree: \n");
                 PrintTree(T1);
-                printf("第二棵树：\n");
+                printf("Second tree: \n");
                 PrintTree(T2);
                 MergeBBSTree(&T1, T2);
-                printf("合并后的树：\n");
+                printf("The merged tree: \n");
                 PrintTree(T1);
                 DestroyBBST(&T2); // 销毁T2，避免内存泄漏
                 break;
@@ -105,7 +105,7 @@ int main() {
             case 5: {
                 BBSTree T2 = NULL;
                 BBSTree T3 = NULL;
-                printf("请输入要分裂的树的元素（以空格分隔，输入完按回车）：\n");
+                printf("Please enter the elements of the tree to be split (separated by space, press enter after entering): \n");
                 getchar(); // 清除缓冲区
                 char buffer[256];
                 fgets(buffer, 256, stdin);
@@ -115,14 +115,14 @@ int main() {
                     InsertAVL(&T1, num, &taller);
                     token = strtok(NULL, " ");
                 }
-                printf("请输入分裂的关键字：");
+                printf("Please enter the split keyword: ");
                 scanf("%d", &key);
-                printf("分裂前的树：\n");
+                printf("The tree before the split: \n");
                 PrintTree(T1);
                 DivBBSTree(T1, &T2, &T3, key);
-                printf("分裂后的树1：\n");
+                printf("The split tree 1: \n");
                 PrintTree(T2);
-                printf("分裂后的树2：\n");
+                printf("The split tree 2: \n");
                 PrintTree(T3);
                 DestroyBBST(&T1); // 销毁T1，避免内存泄漏
                 break;
@@ -133,7 +133,7 @@ int main() {
                 exit(0);
 
             default:
-                printf("无效的选择，请重新输入。\n");
+                printf("Invalid selection, please enter again!\n");
         }
     }
 
