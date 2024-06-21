@@ -1,3 +1,5 @@
 KTP
+AVLT
 *.o
+*.exe
 .vscode
