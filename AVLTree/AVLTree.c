@@ -3,13 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-// 中序遍历
-void InOrderTraverse(AVLTree T) {
-    if (T == NULL) 
-        return;
-    InOrderTraverse(T->lchild);
-    printf("%d ", T->data);
-    InOrderTraverse(T->rchild);
+// 中序遍历得到有序数组
+void InOrderTraversal(AVLTree T, ElemType *arr, int *index) {
+    if (T == NULL) return;
+    InOrderTraversal(T->lchild, arr, index);
+    if (*index == 0 || arr[*index - 1] != T->data) { // 确保没有重复元素
+        arr[(*index)++] = T->data;
+    }
+    InOrderTraversal(T->rchild, arr, index);
 }
 
 // 左旋转
@@ -343,25 +344,91 @@ Status isBalanced(AVLTree T) {
     return TRUE;
 }
 
-void MergeAVLTree(AVLTree *T1, AVLTree T2) {
-    Status s;
-    if (T2 == NULL) 
-        return;
-    if (T2->lchild != NULL) 
-        MergeAVLTree(T1, T2->lchild);
-    InsertAVL(T1, T2->data, &s);
-    if (T2->rchild != NULL) 
-        MergeAVLTree(T1, T2->rchild);
+// 合并两个有序数组
+ElemType* MergeSortedArrays(ElemType *arr1, int size1, ElemType *arr2, int size2, int *newSize) {
+    int totalSize = size1 + size2;
+    ElemType *mergedArray = (ElemType*)malloc(totalSize * sizeof(ElemType));
+    int i = 0, j = 0, k = 0;
+    while (i < size1 && j < size2) {
+        if (arr1[i] < arr2[j]) {
+            if (k == 0 || mergedArray[k - 1] != arr1[i]) {
+                mergedArray[k++] = arr1[i];
+            }
+            i++;
+        } else if (arr1[i] > arr2[j]) {
+            if (k == 0 || mergedArray[k - 1] != arr2[j]) { 
+                mergedArray[k++] = arr2[j];
+            }
+            j++;
+        } else { // 相等时只插入一个
+            if (k == 0 || mergedArray[k - 1] != arr1[i]) {
+                mergedArray[k++] = arr1[i];
+            }
+            i++;
+            j++;
+        }
+    }
+    while (i < size1) {
+        if (k == 0 || mergedArray[k - 1] != arr1[i]) {
+            mergedArray[k++] = arr1[i];
+        }
+        i++;
+    }
+    while (j < size2) {
+        if (k == 0 || mergedArray[k - 1] != arr2[j]) { 
+            mergedArray[k++] = arr2[j];
+        }
+        j++;
+    }
+    *newSize = k;
+    return mergedArray;
 }
 
+// 创建平衡二叉树的辅助函数
+AVLTree CreateAVLFromSortedArray(ElemType *arr, int start, int end) {
+    if (start > end) return NULL;
+    int mid = (start + end) / 2;
+    AVLTree node = (AVLTree)malloc(sizeof(struct AVLTreeNode));
+    node->data = arr[mid];
+    node->bf = EH;
+    node->lchild = CreateAVLFromSortedArray(arr, start, mid - 1);
+    node->rchild = CreateAVLFromSortedArray(arr, mid + 1, end);
+    return node;
+}
+
+// 合并两个AVL树
+void MergeAVLTree(AVLTree *T1, AVLTree T2) {
+    if (T2 == NULL) return;
+    int size1 = GetDepth(*T1) * 2;
+    int size2 = GetDepth(T2) * 2;
+    ElemType *arr1 = (ElemType*)malloc(size1 * sizeof(ElemType));
+    ElemType *arr2 = (ElemType*)malloc(size2 * sizeof(ElemType));
+    int index1 = 0, index2 = 0;
+    InOrderTraversal(*T1, arr1, &index1);
+    InOrderTraversal(T2, arr2, &index2);
+    int newSize;
+    ElemType *mergedArray = MergeSortedArrays(arr1, index1, arr2, index2, &newSize);
+    *T1 = CreateAVLFromSortedArray(mergedArray, 0, newSize - 1);
+    free(arr1);
+    free(arr2);
+    free(mergedArray);
+}
+
+// 分裂AVL树
 void DivAVLTree(AVLTree R, AVLTree *T1, AVLTree *T2, ElemType e) {
-    if (R == NULL) 
-        return;
-    DivAVLTree(R->lchild, T1, T2, e);
-    Status s;
-    if (R->data > e) 
-        InsertAVL(T2, R->data, &s);
-    else 
-        InsertAVL(T1, R->data, &s);
-    DivAVLTree(R->rchild, T1, T2, e);
+    if (R == NULL) return;
+    int size = GetDepth(R) * 2;
+    ElemType *arr = (ElemType*)malloc(size * sizeof(ElemType));
+    int index = 0;
+    InOrderTraversal(R, arr, &index);
+    int mid = 0;
+    for (int i = 0; i < index; i++) {
+        if (arr[i] > e) {
+            mid = i;
+            break;
+        }
+    }
+    *T1 = CreateAVLFromSortedArray(arr, 0, mid - 1);
+    *T2 = CreateAVLFromSortedArray(arr, mid, index - 1);
+    free(arr);
 }

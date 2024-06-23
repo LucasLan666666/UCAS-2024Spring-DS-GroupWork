@@ -16,7 +16,7 @@ typedef struct AVLTreeNode {
     struct AVLTreeNode *lchild, *rchild;
 } *AVLTree;
 
-void InOrderTraverse(AVLTree T);
+void InOrderTraversal(AVLTree T, ElemType *arr, int *index);
 void L_Rotate(AVLTree *T);
 void R_Rotate(AVLTree *T);
 void LeftBalance(AVLTree *T);
@@ -29,6 +29,8 @@ void DestroyAVLTree(AVLTree *T);
 AVLTree SearchAVLTree(AVLTree T, ElemType key);
 Status isBalanced(AVLTree T);
 int GetDepth(AVLTree T);
+ElemType* MergeSortedArrays(ElemType *arr1, int size1, ElemType *arr2, int size2, int *newSize);
+AVLTree CreateAVLFromSortedArray(ElemType *arr, int start, int end);
 void MergeAVLTree(AVLTree *T1, AVLTree T2);
 void DivAVLTree(AVLTree R, AVLTree *T1, AVLTree *T2, ElemType e);
 
