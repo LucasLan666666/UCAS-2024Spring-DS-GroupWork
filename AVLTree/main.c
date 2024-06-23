@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "BBST.h"
+#include "AVLTree.h"
 
 // 打印凹入表形式的平衡二叉树
 void PrintIndentedTree(BBSTree T, int depth) {

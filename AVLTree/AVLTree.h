@@ -23,19 +23,13 @@ void LeftBalance(BBSTree *T);
 void RightBalance(BBSTree *T);
 Status LeftDeleteBalance(BBSTree *T);
 Status RightDeleteBalance(BBSTree *T);
-
 Status InsertAVL(BBSTree *T, ElemType e, Status *taller);
 Status DeleteAVL(BBSTree *T, ElemType e, Status *shorter);
-
 void DestroyBBST(BBSTree *T);
 BBSTree SearchBBST(BBSTree T, ElemType key);
-
 Status isBalanced(BBSTree T);
-
 int GetDepth(BBSTree T);
-
 void MergeBBSTree(BBSTree *T1, BBSTree T2);
-
 void DivBBSTree(BBSTree R, BBSTree *T1, BBSTree *T2, ElemType e);
 
 #endif // BBSTREE_H
