@@ -4,7 +4,7 @@
 #include <string.h>
 
 // 中序遍历
-void InOrderTraverse(BBSTree T) {
+void InOrderTraverse(AVLTree T) {
     if (T == NULL) 
         return;
     InOrderTraverse(T->lchild);
@@ -13,8 +13,8 @@ void InOrderTraverse(BBSTree T) {
 }
 
 // 左旋转
-void L_Rotate(BBSTree *T) {
-    BBSTree rc;
+void L_Rotate(AVLTree *T) {
+    AVLTree rc;
     rc = (*T)->rchild;
     (*T)->rchild = rc->lchild;
     rc->lchild = *T;
@@ -22,8 +22,8 @@ void L_Rotate(BBSTree *T) {
 }
 
 // 右旋转
-void R_Rotate(BBSTree *T) {
-    BBSTree lc;
+void R_Rotate(AVLTree *T) {
+    AVLTree lc;
     lc = (*T)->lchild;
     (*T)->lchild = lc->rchild;
     lc->rchild = *T;
@@ -31,8 +31,8 @@ void R_Rotate(BBSTree *T) {
 }
 
 // 插入之后树 T 失衡时的平衡函数
-void LeftBalance(BBSTree *T) {
-    BBSTree lc, rc;
+void LeftBalance(AVLTree *T) {
+    AVLTree lc, rc;
     lc = (*T)->lchild;
     switch (lc->bf) {
         case LH: 
@@ -61,8 +61,8 @@ void LeftBalance(BBSTree *T) {
 }
 
 // 删除之后树 T 的左子树失衡时的平衡函数
-Status LeftDeleteBalance(BBSTree *T) {
-    BBSTree lc, rc;
+Status LeftDeleteBalance(AVLTree *T) {
+    AVLTree lc, rc;
     lc = (*T)->lchild;
     Status result;
     switch (lc->bf) {
@@ -100,8 +100,8 @@ Status LeftDeleteBalance(BBSTree *T) {
 }
 
 // 插入之后右子树失衡时的平衡函数
-void RightBalance(BBSTree *T) {
-    BBSTree lc, rc;
+void RightBalance(AVLTree *T) {
+    AVLTree lc, rc;
     rc = (*T)->rchild;
     switch (rc->bf) {
         case RH: 
@@ -130,8 +130,8 @@ void RightBalance(BBSTree *T) {
 }
 
 // 删除之后右子树失衡时的平衡函数
-Status RightDeleteBalance(BBSTree *T) {
-    BBSTree lc, rc;
+Status RightDeleteBalance(AVLTree *T) {
+    AVLTree lc, rc;
     rc = (*T)->rchild;
     Status result;
     switch (rc->bf) {
@@ -169,9 +169,9 @@ Status RightDeleteBalance(BBSTree *T) {
 }
 
 // 插入函数
-Status InsertAVL(BBSTree *T, ElemType e, Status *taller) {
+Status InsertAVL(AVLTree *T, ElemType e, Status *taller) {
     if (*T == NULL) {
-        *T = (BBSTree)malloc(sizeof(struct BBSTNode));
+        *T = (AVLTree)malloc(sizeof(struct AVLTreeNode));
         if (*T == NULL) return FALSE;
         (*T)->data = e;
         (*T)->lchild = (*T)->rchild = NULL;
@@ -223,7 +223,7 @@ Status InsertAVL(BBSTree *T, ElemType e, Status *taller) {
 }
 
 // 删除函数
-Status DeleteAVL(BBSTree *T, ElemType e, Status *shorter) {
+Status DeleteAVL(AVLTree *T, ElemType e, Status *shorter) {
     if (*T == NULL) {
         return FALSE;
     } else if (e < (*T)->data) {
@@ -263,7 +263,7 @@ Status DeleteAVL(BBSTree *T, ElemType e, Status *shorter) {
             }
         }
     } else {
-        BBSTree p;
+        AVLTree p;
         p = *T;
         if ((*T)->lchild != NULL && (*T)->rchild != NULL) {
             p = (*T)->lchild;
@@ -296,38 +296,38 @@ Status DeleteAVL(BBSTree *T, ElemType e, Status *shorter) {
     return TRUE;
 }
 
-void DestroyBBST(BBSTree *T) {
+void DestroyAVLTree(AVLTree *T) {
     if (*T == NULL) return;
     if ((*T)->lchild != NULL) 
-        DestroyBBST(&(*T)->lchild);
+        DestroyAVLTree(&(*T)->lchild);
     if ((*T)->rchild != NULL) 
-        DestroyBBST(&(*T)->rchild);
+        DestroyAVLTree(&(*T)->rchild);
     free(*T);
     *T = NULL;
 }
 
-BBSTree SearchBBST(BBSTree T, ElemType key) {
+AVLTree SearchAVLTree(AVLTree T, ElemType key) {
     if (T == NULL) 
         return NULL;
     if (T->data == key) 
         return T;
     if (T->data > key) 
-        return SearchBBST(T->lchild, key);
+        return SearchAVLTree(T->lchild, key);
     else 
-        return SearchBBST(T->rchild, key);
+        return SearchAVLTree(T->rchild, key);
 }
 
 int max(int a, int b) {
     return a > b ? a : b;
 }
 
-int GetDepth(BBSTree T) {
+int GetDepth(AVLTree T) {
     if (T == NULL) 
         return 0;
     return max(GetDepth(T->lchild), GetDepth(T->rchild)) + 1;
 }
 
-Status isBalanced(BBSTree T) {
+Status isBalanced(AVLTree T) {
     if (T == NULL) 
         return TRUE;
     if ((T->lchild != NULL && T->data < T->lchild->data) || (T->rchild != NULL && T->data > T->rchild->data)) 
@@ -343,25 +343,25 @@ Status isBalanced(BBSTree T) {
     return TRUE;
 }
 
-void MergeBBSTree(BBSTree *T1, BBSTree T2) {
+void MergeAVLTree(AVLTree *T1, AVLTree T2) {
     Status s;
     if (T2 == NULL) 
         return;
     if (T2->lchild != NULL) 
-        MergeBBSTree(T1, T2->lchild);
+        MergeAVLTree(T1, T2->lchild);
     InsertAVL(T1, T2->data, &s);
     if (T2->rchild != NULL) 
-        MergeBBSTree(T1, T2->rchild);
+        MergeAVLTree(T1, T2->rchild);
 }
 
-void DivBBSTree(BBSTree R, BBSTree *T1, BBSTree *T2, ElemType e) {
+void DivAVLTree(AVLTree R, AVLTree *T1, AVLTree *T2, ElemType e) {
     if (R == NULL) 
         return;
-    DivBBSTree(R->lchild, T1, T2, e);
+    DivAVLTree(R->lchild, T1, T2, e);
     Status s;
     if (R->data > e) 
         InsertAVL(T2, R->data, &s);
     else 
         InsertAVL(T1, R->data, &s);
-    DivBBSTree(R->rchild, T1, T2, e);
+    DivAVLTree(R->rchild, T1, T2, e);
 }
