@@ -27,7 +27,7 @@ main(void)
         JudgeOver(&history);                    /* 判断是否结束，是则退出 */
         GetNextStep(innerBoard, &history);      /* 下一步 */
         // Continue();                             /* 手动停顿 */
-        SleepForAWhile(500);                    /* 自动停顿 */
+        SleepForAWhile(250);                    /* 自动停顿 */
         UpdateInnerBoard(&history, innerBoard); /* 根据历史记录更新心中棋盘 */
     }
     return 0;
