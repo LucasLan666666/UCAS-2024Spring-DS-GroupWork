@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -g
 
 TARGET = AVLTree
 
-SRCS = main.c BBST.c
+SRCS = main.c AVLTree.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(TARGET)
