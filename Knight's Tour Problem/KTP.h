@@ -45,6 +45,7 @@ typedef struct {
 /* 坐标 */
 typedef struct {
     int x, y;
+    int block[8]; /* 下一步不可走的方向 */
 } Coord;
 
 /* 历史记录 */
