@@ -3,6 +3,20 @@
 #include <string.h>
 #include "AVLTree.h"
 
+/* 清屏 */
+void ClearScreen(void){
+    int clear = system("cls");
+    (void)clear;
+}
+
+/* 按下回车继续，读到 EOF 退出，不接受实际输入 */
+void Continue(void){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+        ;
+    if (c == EOF) exit(0); /* 接收到 EOF 直接退出 */
+}
+
 // 打印凹入表形式的平衡二叉树
 void PrintIndentedTree(AVLTree T, int depth) {
     if (T == NULL) 
@@ -26,6 +40,7 @@ int main() {
     ElemType key;
 
     while (1) {
+        ClearScreen();
         printf("\nPlease input the operation type: \n");
         printf("Enter 1 to insert node in the AVLTree\n");
         printf("Enter 2 to delete node in the AVLTree\n");
@@ -48,6 +63,7 @@ int main() {
                 }
                 PrintTree(T1);
                 puts("====================================================================================================================================");
+                Continue();
                 break;
             
             case 2:
@@ -61,6 +77,7 @@ int main() {
                 }
                 PrintTree(T1);
                 puts("====================================================================================================================================");
+                Continue();
                 break;
 
             case 3:
@@ -74,6 +91,7 @@ int main() {
                     printf("Search failed, the keyword does not exist.\n");
                 }
                 puts("====================================================================================================================================");
+                Continue();
                 break;
 
             case 4: {
@@ -141,6 +159,7 @@ int main() {
                 PrintTree(T3);
                 puts("====================================================================================================================================");
                 DestroyAVLTree(&T1); // 销毁T1，避免内存泄漏
+                Continue();
                 break;
             }
 
@@ -151,8 +170,10 @@ int main() {
             default:
                 printf("Invalid selection, please enter again!\n");
                 puts("====================================================================================================================================");
+                Continue();
         }
+        printf("Please press Enter to continue...");
+        Continue();
     }
-
     return 0;
 }
