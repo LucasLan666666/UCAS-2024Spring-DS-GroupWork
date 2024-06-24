@@ -56,10 +56,12 @@ SleepForAWhile(unsigned int msec)
 void
 RefreshHistory(History *history_ptr)
 {
-    int i;
+    int i, j;
     for (i = 0; i < BOARD_SIZE*BOARD_SIZE; i++) {
         history_ptr->path[i].x = 0;
         history_ptr->path[i].y = 0;
+        for (j = 0; j < 8; j++)
+            history_ptr->path[i].block[j] = 0;
     }
     history_ptr->pointer = 0;
 }

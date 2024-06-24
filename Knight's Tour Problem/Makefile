@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -Wall -Werror -g
+# CFLAGS = -Wall -Werror -g
+CFLAGS = -g
 
 TARGET = KTP
 

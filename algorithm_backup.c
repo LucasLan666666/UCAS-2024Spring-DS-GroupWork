@@ -67,20 +67,16 @@ push(Coord coord, History* history_ptr)
 {
     history_ptr->pointer++;
     history_ptr->path[history_ptr->pointer] = coord;
-    for (int i = 0; i < 8; i++)
-        history_ptr->path[history_ptr->pointer].block[i] = 0;
 }
 
 
-/* 出栈 */
-static void
-pop(History* history_ptr)
-{
-    Coord tmp = history_ptr->path[history_ptr->pointer];
-
-    history_ptr->pointer--;
-    history_ptr->path[history_ptr->pointer].block[0] = 1;
-}
+// /* 出栈 */
+// static void
+// pop(History* history_ptr)
+// {
+//     history_ptr->path[history_ptr->pointer] = (Coord) {0, 0};
+//     history_ptr->pointer--;
+// }
 
 
 /*
