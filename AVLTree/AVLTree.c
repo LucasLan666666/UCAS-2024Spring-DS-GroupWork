@@ -328,22 +328,6 @@ int GetDepth(AVLTree T) {
     return max(GetDepth(T->lchild), GetDepth(T->rchild)) + 1;
 }
 
-Status isBalanced(AVLTree T) {
-    if (T == NULL) 
-        return TRUE;
-    if ((T->lchild != NULL && T->data < T->lchild->data) || (T->rchild != NULL && T->data > T->rchild->data)) 
-        return FALSE;
-    if (isBalanced(T->lchild) == FALSE) 
-        return FALSE;
-    if (isBalanced(T->rchild) == FALSE) 
-        return FALSE;
-    int depthLeft = GetDepth(T->lchild);
-    int depthRight = GetDepth(T->rchild);
-    if (abs(depthLeft - depthRight) > 1) 
-        return FALSE;
-    return TRUE;
-}
-
 // 合并两个有序数组
 ElemType* MergeSortedArrays(ElemType *arr1, int size1, ElemType *arr2, int size2, int *newSize) {
     int totalSize = size1 + size2;
