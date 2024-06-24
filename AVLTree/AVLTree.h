@@ -27,7 +27,6 @@ Status InsertAVL(AVLTree *T, ElemType e, Status *taller);
 Status DeleteAVL(AVLTree *T, ElemType e, Status *shorter);
 void DestroyAVLTree(AVLTree *T);
 AVLTree SearchAVLTree(AVLTree T, ElemType key);
-Status isBalanced(AVLTree T);
 int GetDepth(AVLTree T);
 ElemType* MergeSortedArrays(ElemType *arr1, int size1, ElemType *arr2, int size2, int *newSize);
 AVLTree CreateAVLFromSortedArray(ElemType *arr, int start, int end);
