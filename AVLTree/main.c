@@ -38,7 +38,6 @@ int main() {
     Status taller, shorter;
     int choice;
     ElemType key;
-
     while (1) {
         ClearScreen();
         printf("\nPlease input the operation type: \n");
@@ -65,7 +64,6 @@ int main() {
                 puts("====================================================================================================================================");
                 Continue();
                 break;
-            
             case 2:
                 printf("Please enter the keyword you want to delete: ");
                 scanf("%d", &key);
@@ -79,7 +77,6 @@ int main() {
                 puts("====================================================================================================================================");
                 Continue();
                 break;
-
             case 3:
                 printf("Please enter the keyword you are searching: ");
                 scanf("%d", &key);
@@ -93,7 +90,6 @@ int main() {
                 puts("====================================================================================================================================");
                 Continue();
                 break;
-
             case 4: {
                 DestroyAVLTree(&T1);
                 AVLTree T2 = NULL;
@@ -130,7 +126,6 @@ int main() {
                 DestroyAVLTree(&T2); // 销毁T2，避免内存泄漏
                 break;
             }
-
             case 5: {
                 DestroyAVLTree(&T1);
                 AVLTree T2 = NULL;
@@ -162,11 +157,9 @@ int main() {
                 Continue();
                 break;
             }
-
             case 6:
                 DestroyAVLTree(&T1);
                 exit(0);
-
             default:
                 printf("Invalid selection, please enter again!\n");
                 puts("====================================================================================================================================");
