@@ -9,7 +9,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(TARGET)
 	@echo "Compiling AVLT..."
 	@echo "AVLT is ready to run."
-	./AVLT
+	./AVLTree
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
