@@ -1,6 +1,13 @@
 #ifndef AVLTree_H
 #define AVLTree_H
 
+#ifdef        _WIN32
+#define CLEAR_SCREEN   "cls"     /* Windows 下清屏指令 */
+#else
+#define CLEAR_SCREEN   "clear"   /* Linux 下清屏指令 */
+#endif /* _WIN32 */
+
+
 #define LH +1
 #define EH 0
 #define RH -1

@@ -5,7 +5,7 @@
 
 /* 清屏 */
 void ClearScreen(void){
-    int clear = system("cls");
+    int clear = system(CLEAR_SCREEN);
     (void)clear;
 }
 
@@ -19,7 +19,7 @@ void Continue(void){
 
 // 打印凹入表形式的平衡二叉树
 void PrintIndentedTree(AVLTree T, int depth) {
-    if (T == NULL) 
+    if (T == NULL)
         return;
     PrintIndentedTree(T->rchild, depth + 1);
     for (int i = 0; i < depth; i++) {

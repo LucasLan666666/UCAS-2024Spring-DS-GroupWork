@@ -36,23 +36,23 @@ void LeftBalance(AVLTree *T) {
     AVLTree lc, rc;
     lc = (*T)->lchild;
     switch (lc->bf) {
-        case LH: 
-            (*T)->bf = lc->bf = EH; 
+        case LH:
+            (*T)->bf = lc->bf = EH;
             break;
-        case RH: 
+        case RH:
             rc = lc->rchild;
             switch (rc->bf) {
-                case LH: 
-                    (*T)->bf = RH; 
-                    lc->bf = EH; 
-                    break; 
-                case EH: 
-                    (*T)->bf = lc->bf = EH; 
-                    break; 
-                case RH: 
-                    (*T)->bf = EH; 
-                    lc->bf = LH; 
-                    break; 
+                case LH:
+                    (*T)->bf = RH;
+                    lc->bf = EH;
+                    break;
+                case EH:
+                    (*T)->bf = lc->bf = EH;
+                    break;
+                case RH:
+                    (*T)->bf = EH;
+                    lc->bf = LH;
+                    break;
             }
             rc->bf = EH;
             L_Rotate(&(*T)->lchild);
@@ -67,32 +67,32 @@ Status LeftDeleteBalance(AVLTree *T) {
     lc = (*T)->lchild;
     Status result;
     switch (lc->bf) {
-        case LH: 
-            (*T)->bf = lc->bf = EH; 
+        case LH:
+            (*T)->bf = lc->bf = EH;
             result = TRUE;
             break;
-        case RH: 
+        case RH:
             rc = lc->rchild;
             switch (rc->bf) {
                 case LH:
-                    (*T)->bf = RH; 
-                    lc->bf = EH; 
-                    break; 
-                case EH: 
-                    (*T)->bf = lc->bf = EH; 
-                    break; 
-                case RH: 
-                    (*T)->bf = EH; 
-                    lc->bf = LH; 
-                    break; 
+                    (*T)->bf = RH;
+                    lc->bf = EH;
+                    break;
+                case EH:
+                    (*T)->bf = lc->bf = EH;
+                    break;
+                case RH:
+                    (*T)->bf = EH;
+                    lc->bf = LH;
+                    break;
             }
             rc->bf = EH;
             L_Rotate(&(*T)->lchild);
             result = TRUE;
             break;
-        case EH: 
-            (*T)->bf = LH; 
-            lc->bf = RH; 
+        case EH:
+            (*T)->bf = LH;
+            lc->bf = RH;
             result = FALSE;
             break;
     }
@@ -105,23 +105,23 @@ void RightBalance(AVLTree *T) {
     AVLTree lc, rc;
     rc = (*T)->rchild;
     switch (rc->bf) {
-        case RH: 
-            (*T)->bf = rc->bf = EH; 
+        case RH:
+            (*T)->bf = rc->bf = EH;
             break;
-        case LH: 
+        case LH:
             lc = rc->lchild;
             switch (lc->bf) {
-                case RH: 
-                    (*T)->bf = LH; 
-                    rc->bf = EH; 
-                    break; 
-                case EH: 
-                    (*T)->bf = rc->bf = EH; 
-                    break; 
-                case LH: 
-                    (*T)->bf = EH; 
-                    rc->bf = RH; 
-                    break; 
+                case RH:
+                    (*T)->bf = LH;
+                    rc->bf = EH;
+                    break;
+                case EH:
+                    (*T)->bf = rc->bf = EH;
+                    break;
+                case LH:
+                    (*T)->bf = EH;
+                    rc->bf = RH;
+                    break;
             }
             lc->bf = EH;
             R_Rotate(&(*T)->rchild);
@@ -136,32 +136,32 @@ Status RightDeleteBalance(AVLTree *T) {
     rc = (*T)->rchild;
     Status result;
     switch (rc->bf) {
-        case RH: 
-            (*T)->bf = rc->bf = EH; 
+        case RH:
+            (*T)->bf = rc->bf = EH;
             result = TRUE;
             break;
-        case LH: 
+        case LH:
             lc = rc->lchild;
             switch (lc->bf) {
-                case RH: 
-                    (*T)->bf = LH; 
-                    rc->bf = EH; 
-                    break; 
-                case EH: 
-                    (*T)->bf = rc->bf = EH; 
-                    break; 
-                case LH: 
-                    (*T)->bf = EH; 
-                    rc->bf = RH; 
-                    break; 
+                case RH:
+                    (*T)->bf = LH;
+                    rc->bf = EH;
+                    break;
+                case EH:
+                    (*T)->bf = rc->bf = EH;
+                    break;
+                case LH:
+                    (*T)->bf = EH;
+                    rc->bf = RH;
+                    break;
             }
             lc->bf = EH;
             R_Rotate(&(*T)->rchild);
             result = TRUE;
             break;
-        case EH: 
-            (*T)->bf = RH; 
-            rc->bf = LH; 
+        case EH:
+            (*T)->bf = RH;
+            rc->bf = LH;
             result = FALSE;
             break;
     }
@@ -182,41 +182,41 @@ Status InsertAVL(AVLTree *T, ElemType e, Status *taller) {
         *taller = FALSE;
         return FALSE;
     } else if (e < (*T)->data) {
-        if (InsertAVL(&(*T)->lchild, e, taller) == FALSE) 
+        if (InsertAVL(&(*T)->lchild, e, taller) == FALSE)
             return FALSE;
         if (*taller == TRUE) {
             switch ((*T)->bf) {
-                case LH: 
-                    LeftBalance(T); 
-                    *taller = FALSE; 
-                    break; 
-                case RH: 
-                    (*T)->bf = EH; 
-                    *taller = FALSE; 
-                    break; 
-                case EH: 
-                    (*T)->bf = LH; 
-                    *taller = TRUE; 
-                    break; 
+                case LH:
+                    LeftBalance(T);
+                    *taller = FALSE;
+                    break;
+                case RH:
+                    (*T)->bf = EH;
+                    *taller = FALSE;
+                    break;
+                case EH:
+                    (*T)->bf = LH;
+                    *taller = TRUE;
+                    break;
             }
         }
     } else {
-        if (InsertAVL(&(*T)->rchild, e, taller) == FALSE) 
+        if (InsertAVL(&(*T)->rchild, e, taller) == FALSE)
             return FALSE;
         if (*taller == TRUE) {
             switch ((*T)->bf) {
-                case RH: 
-                    RightBalance(T); 
-                    *taller = FALSE; 
-                    break; 
-                case LH: 
-                    (*T)->bf = EH; 
-                    *taller = FALSE; 
-                    break; 
-                case EH: 
-                    (*T)->bf = RH; 
-                    *taller = TRUE; 
-                    break; 
+                case RH:
+                    RightBalance(T);
+                    *taller = FALSE;
+                    break;
+                case LH:
+                    (*T)->bf = EH;
+                    *taller = FALSE;
+                    break;
+                case EH:
+                    (*T)->bf = RH;
+                    *taller = TRUE;
+                    break;
             }
         }
     }
@@ -228,39 +228,39 @@ Status DeleteAVL(AVLTree *T, ElemType e, Status *shorter) {
     if (*T == NULL) {
         return FALSE;
     } else if (e < (*T)->data) {
-        if (DeleteAVL(&(*T)->lchild, e, shorter) == FALSE) 
+        if (DeleteAVL(&(*T)->lchild, e, shorter) == FALSE)
             return FALSE;
         if (*shorter == TRUE) {
             switch ((*T)->bf) {
-                case LH: 
-                    (*T)->bf = EH; 
-                    *shorter = TRUE; 
-                    break; 
-                case EH: 
-                    (*T)->bf = RH; 
-                    *shorter = FALSE; 
-                    break; 
-                case RH: 
-                    *shorter = RightDeleteBalance(T); 
-                    break; 
+                case LH:
+                    (*T)->bf = EH;
+                    *shorter = TRUE;
+                    break;
+                case EH:
+                    (*T)->bf = RH;
+                    *shorter = FALSE;
+                    break;
+                case RH:
+                    *shorter = RightDeleteBalance(T);
+                    break;
             }
         }
     } else if (e > (*T)->data) {
-        if (DeleteAVL(&(*T)->rchild, e, shorter) == FALSE) 
+        if (DeleteAVL(&(*T)->rchild, e, shorter) == FALSE)
             return FALSE;
         if (*shorter == TRUE) {
             switch ((*T)->bf) {
-                case RH: 
-                    (*T)->bf = EH; 
-                    *shorter = TRUE; 
-                    break; 
-                case EH: 
-                    (*T)->bf = LH; 
-                    *shorter = FALSE; 
-                    break; 
-                case LH: 
-                    *shorter = LeftDeleteBalance(T); 
-                    break; 
+                case RH:
+                    (*T)->bf = EH;
+                    *shorter = TRUE;
+                    break;
+                case EH:
+                    (*T)->bf = LH;
+                    *shorter = FALSE;
+                    break;
+                case LH:
+                    *shorter = LeftDeleteBalance(T);
+                    break;
             }
         }
     } else {
@@ -275,17 +275,17 @@ Status DeleteAVL(AVLTree *T, ElemType e, Status *shorter) {
             DeleteAVL(&(*T)->lchild, p->data, shorter);
             if (*shorter == TRUE) {
                 switch ((*T)->bf) {
-                    case LH: 
-                        (*T)->bf = EH; 
-                        *shorter = TRUE; 
-                        break; 
-                    case EH: 
-                        (*T)->bf = RH; 
-                        *shorter = FALSE; 
-                        break; 
-                    case RH: 
-                        *shorter = RightDeleteBalance(T); 
-                        break; 
+                    case LH:
+                        (*T)->bf = EH;
+                        *shorter = TRUE;
+                        break;
+                    case EH:
+                        (*T)->bf = RH;
+                        *shorter = FALSE;
+                        break;
+                    case RH:
+                        *shorter = RightDeleteBalance(T);
+                        break;
                 }
             }
         } else {
@@ -299,22 +299,22 @@ Status DeleteAVL(AVLTree *T, ElemType e, Status *shorter) {
 
 void DestroyAVLTree(AVLTree *T) {
     if (*T == NULL) return;
-    if ((*T)->lchild != NULL) 
+    if ((*T)->lchild != NULL)
         DestroyAVLTree(&(*T)->lchild);
-    if ((*T)->rchild != NULL) 
+    if ((*T)->rchild != NULL)
         DestroyAVLTree(&(*T)->rchild);
     free(*T);
     *T = NULL;
 }
 
 AVLTree SearchAVLTree(AVLTree T, ElemType key) {
-    if (T == NULL) 
+    if (T == NULL)
         return NULL;
-    if (T->data == key) 
+    if (T->data == key)
         return T;
-    if (T->data > key) 
+    if (T->data > key)
         return SearchAVLTree(T->lchild, key);
-    else 
+    else
         return SearchAVLTree(T->rchild, key);
 }
 
@@ -323,7 +323,7 @@ int max(int a, int b) {
 }
 
 int GetDepth(AVLTree T) {
-    if (T == NULL) 
+    if (T == NULL)
         return 0;
     return max(GetDepth(T->lchild), GetDepth(T->rchild)) + 1;
 }
@@ -340,7 +340,7 @@ ElemType* MergeSortedArrays(ElemType *arr1, int size1, ElemType *arr2, int size2
             }
             i++;
         } else if (arr1[i] > arr2[j]) {
-            if (k == 0 || mergedArray[k - 1] != arr2[j]) { 
+            if (k == 0 || mergedArray[k - 1] != arr2[j]) {
                 mergedArray[k++] = arr2[j];
             }
             j++;
@@ -359,7 +359,7 @@ ElemType* MergeSortedArrays(ElemType *arr1, int size1, ElemType *arr2, int size2
         i++;
     }
     while (j < size2) {
-        if (k == 0 || mergedArray[k - 1] != arr2[j]) { 
+        if (k == 0 || mergedArray[k - 1] != arr2[j]) {
             mergedArray[k++] = arr2[j];
         }
         j++;
