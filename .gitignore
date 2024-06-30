@@ -3,3 +3,6 @@ AVLTree
 *.o
 *.exe
 .vscode
+*.aux
+*.log
+*.out
